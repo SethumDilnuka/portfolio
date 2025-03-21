@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sethum De Silva - Innovation Engineer</title>
+
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta name="description" content="Portfolio of Sethum De Silva, an Innovation Engineer specializing in embedded systems, IoT, and assistive technologies." />
+    <meta name="keywords" content="portfolio, innovation engineer, IoT, embedded systems, assistive technology" />
+    <meta property="og:title" content="Sethum De Silva Portfolio" />
+    <meta property="og:description" content="Innovation Engineer – transforming ideas into reality." />
+    <meta property="og:image" content="profile.jpg" />
+    <meta property="og:url" content="http://example.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+
+    <style>
+        /*----------------------------------------
+          1. CSS Variables – Light & Dark Themes
+        ----------------------------------------*/
+        :root {
+            /* Light Theme */
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --muted-color: #555555;
+            --card-bg: #f8f8f8;
+            --border-color: #eaeaea;
+            --link-color: #000000;
+            --max-width: 1200px;
+        }
+        .dark-theme {
+            /* Dark Theme Overrides */
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --muted-color: #aaaaaa;
+            --card-bg: #111111;
+            --border-color: #333333;
+            --link-color: #ffffff;
+        }
+
+        /*----------------------------------------
+          2. Global Reset & Base Styles
+        ----------------------------------------*/
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        a { color: var(--link-color); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--muted-color); }
+        .container { width: 90%; max-width: var(--max-width); margin: 0 auto; }
+
+        /*----------------------------------------
+          3. Navigation – Sticky & Responsive
+        ----------------------------------------*/
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .brand { font-size: 1.5rem; font-weight: bold; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { font-weight: 500; }
+        .nav-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background: var(--bg-color);
+                flex-direction: column;
+                width: 200px;
+                border: 1px solid var(--border-color);
+                border-top: none;
+                display: none;
+            }
+            .nav-links.show { display: flex; }
+            .nav-links a { padding: 15px; border-bottom: 1px solid var(--border-color); }
+        }
+        .theme-toggle-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .theme-toggle-btn:hover { background: var(--card-bg); }
+
+        /*----------------------------------------
+          4. Hero Section – Full Screen Background
+        ----------------------------------------*/
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: url('hero-bg.jpg') no-repeat center center/cover;
+            color: var(--text-color);
+            padding: 20px;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero h2 { font-size: 2rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.1rem; margin-bottom: 30px; color: var(--muted-color); }
+        .hero .btn {
+            padding: 10px 20px;
+            border: 1px solid var(--text-color);
+            background: var(--text-color);
+            color: var(--bg-color);
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+        .hero .btn:hover { background: var(--bg-color); color: var(--text-color); }
+
+        /*----------------------------------------
+          5. Section Titles
+        ----------------------------------------*/
+        .section { padding: 60px 0; }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--text-color);
+            margin: 10px auto 0;
+        }
+
+        /*----------------------------------------
+          6. Projects – Grid Layout
+        ----------------------------------------*/
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        .project-card:hover { transform: translateY(-5px); }
+        .project-card h3 { margin-bottom: 10px; }
+        .project-caption {
+            font-style: italic;
+            color: var(--muted-color);
+            margin-bottom: 10px;
+        }
+        .project-tag {
+            display: inline-block;
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 5px 5px 5px 0;
+        }
+        .features { list-style: none; margin-top: 10px; }
+        .features li { margin-bottom: 5px; color: var(--muted-color); }
+        .features i { margin-right: 5px; }
+        .project-impact { margin-top: 10px; font-weight: bold; }
+
+        /*----------------------------------------
+          7. Cards – Education, Skills, etc.
+        ----------------------------------------*/
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            background: var(--card-bg);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .card-header h3 { font-size: 1.1rem; }
+        .card-header .date {
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        .flex-card {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            background: var(--card-bg);
+        }
+        .flex-card .icon { font-size: 2rem; }
+        .award-meta { font-size: 0.9rem; color: var(--muted-color); margin-top: 5px; }
+
+        /*----------------------------------------
+          8. Skills Section (Using Project Cards Style)
+        ----------------------------------------*/
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            padding: 20px;
+        }
+        .skill-icon { font-size: 2rem; margin-bottom: 10px; color: var(--text-color); }
+        .skill-card h4 { margin-bottom: 10px; }
+        .skill-card p { color: var(--muted-color); }
+
+        /*----------------------------------------
+          9. Contact Form
+        ----------------------------------------*/
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        .contact-form button {
+            padding: 10px;
+            border: none;
+            background: var(--text-color);
+            color: var(--bg-color);
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .contact-form button:hover { opacity: 0.8; }
+
+        /*----------------------------------------
+          10. Footer
+        ----------------------------------------*/
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 40px 0;
+        }
+        .footer-social a {
+            margin: 0 10px;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+        .cv-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            border: 1px solid var(--text-color);
+            background: var(--text-color);
+            color: var(--bg-color);
+            border-radius: 30px;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+        }
+        .cv-button:hover { background: var(--bg-color); color: var(--text-color); }
+    </style>
+</head>
+<body class="light-theme">
+<!-- Navigation -->
+<header>
+    <div class="container nav-container">
+        <div class="brand">Sethum De Silva</div>
+        <div class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></div>
+        <nav class="nav-links" id="navLinks">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#patents">Patents</a>
+            <a href="#awards">Awards</a>
+            <a href="#contact">Contact</a>
+            <button class="theme-toggle-btn" id="themeToggle">Toggle Theme</button>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <div class="hero-content container">
+        <h1>Hello, I'm Sethum</h1>
+        <h2>Innovation Engineer</h2>
+        <p>I create innovative solutions by merging technology with creativity. Welcome to my portfolio.</p>
+        <button class="btn" onclick="location.href='#contact'">Get in Touch</button>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section container" id="about">
+    <h2 class="section-title">Who Am I?</h2>
+    <p>
+        I am an Innovation Engineer passionate about turning visionary ideas into tangible products using embedded systems, IoT, and assistive technologies. Currently pursuing my Diploma/Bachelor's in Software Engineering at IJSE, I continuously work on projects that push the boundaries of modern technology.
+    </p>
+    <p>
+        My work focuses on creating accessible and efficient solutions that improve everyday life, from advanced mobility aids to smart automation systems.
+    </p>
+    <p>
+        Contact: <br>
+        <i class="fas fa-envelope"></i> <a href="mailto:dlnuka1234@gmail.com">dlnuka1234@gmail.com</a> &nbsp;|&nbsp;
+        <i class="fas fa-phone"></i> <a href="tel:+94756570965">+94 75 657 0965</a> &nbsp;|&nbsp;
+        <i class="fas fa-map-marker-alt"></i> Ambalangoda, Galle, Sri Lanka
+    </p>
+</section>
+<section id="about">
+    <div class="container about-section">
+        <img src="profile.heic" alt="Sethum Dilnuka" class="about-photo">
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>
+                I'm <b>Sethum Dilnuka</b>, an Innovation Engineer, Software Engineering student, and content creator.
+                Passionate about building innovative solutions in IoT, robotics, and software development. I also run
+                <b>Shutter & Frame Studio</b>, specializing in photography and videography.
+            </p>
+            <p>
+                My expertise includes Java, UI/UX design, embedded systems, and drone technology. I'm constantly
+                exploring new ideas to push the boundaries of technology and creativity.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Projects Section -->
+<section class="section container" id="projects">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="project-grid">
+        <!-- HandPilot Car -->
+        <article class="project-card">
+            <h3>HandPilot Car</h3>
+            <p class="project-caption">"Driving Independence: The HandPilot Car revolutionizes mobility for the disabled with ergonomic, hand-controlled navigation."</p>
+            <span class="project-tag">Accessible Mobility</span>
+            <span class="project-tag">Embedded Systems</span>
+            <span class="project-tag">Patent #20087</span>
+            <p>
+                The HandPilot Car is an innovative, hand-controlled vehicle designed to provide independent mobility for individuals with leg disabilities. It features ergonomic controls for acceleration, braking, and steering, ensuring a safe and user-friendly experience.
+            </p>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> Ergonomic controls</li>
+                <li><i class="fas fa-check"></i> Safety-certified</li>
+                <li><i class="fas fa-check"></i> Award-winning design</li>
+            </ul>
+            <p class="project-impact">Impact: Recognized nationally and patented (SL Registration No. 20087)</p>
+        </article>
+
+        <!-- Smart Cleaning Robot -->
+        <article class="project-card">
+            <h3>Smart Cleaning Robot</h3>
+            <p class="project-caption">"Clean Smarter: An autonomous cleaning robot that navigates your space with precision and ease."</p>
+            <span class="project-tag">IoT</span>
+            <span class="project-tag">Automation</span>
+            <span class="project-tag">Embedded Systems</span>
+            <p>
+                This WiFi-controlled autonomous cleaning robot uses Arduino, motor drivers, and sensors for obstacle detection and navigation. It features a mobile app for control and a 3D-printed chassis, making it a versatile and efficient cleaning solution.
+            </p>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> Mobile app control</li>
+                <li><i class="fas fa-check"></i> Sensor navigation</li>
+                <li><i class="fas fa-check"></i> 3D-printed chassis</li>
+            </ul>
+            <p class="project-impact">Impact: Awarded at Sahasak Nimavum 2019 and showcased at Ruhuna Innovation Exhibition</p>
+        </article>
+
+        <!-- Smart Shoes for the Visually Impaired -->
+        <article class="project-card">
+            <h3>Smart Shoes for the Visually Impaired</h3>
+            <p class="project-caption">"Step Confidently: Smart shoes that guide and protect the visually impaired with advanced sensor technology."</p>
+            <span class="project-tag">Assistive Tech</span>
+            <span class="project-tag">IoT</span>
+            <span class="project-tag">AI</span>
+            <p>
+                These Arduino-powered smart shoes are equipped with ultrasonic sensors, vibration feedback, GPS navigation, and fall detection to assist visually impaired users. They provide real-time voice alerts and emergency notifications, enhancing safety and independence.
+            </p>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> Real-time voice alerts</li>
+                <li><i class="fas fa-check"></i> Emergency notifications</li>
+                <li><i class="fas fa-check"></i> GPS integration</li>
+            </ul>
+        </article>
+
+        <!-- Smart Home Security System -->
+        <article class="project-card">
+            <h3>Smart Home Security System</h3>
+            <p class="project-caption">"Secure Your Space: A smart home security system that keeps you connected and protected."</p>
+            <span class="project-tag">IoT</span>
+            <span class="project-tag">Security</span>
+            <span class="project-tag">Mobile Apps</span>
+            <p>
+                A comprehensive home security system that can be controlled remotely via WiFi or Bluetooth. It integrates motion sensors, door sensors, and cameras to monitor and secure your home, demonstrating advanced IoT and security system integration skills.
+            </p>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> Remote monitoring</li>
+                <li><i class="fas fa-check"></i> Motion detection</li>
+                <li><i class="fas fa-check"></i> Instant alerts</li>
+            </ul>
+        </article>
+
+        <!-- Automated Plant Watering System -->
+        <article class="project-card">
+            <h3>Automated Plant Watering System</h3>
+            <p class="project-caption">"Green Thumb Tech: An automated watering system that keeps your plants thriving with minimal effort."</p>
+            <span class="project-tag">IoT</span>
+            <span class="project-tag">Automation</span>
+            <span class="project-tag">Arduino</span>
+            <p>
+                This system automates plant care by using a soil moisture sensor to determine when watering is needed. It includes an Arduino, soil moisture sensor, water pump, relay module, and tubing, showcasing the ability to create efficient, sensor-driven solutions.
+            </p>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> Moisture sensing</li>
+                <li><i class="fas fa-check"></i> Automated irrigation</li>
+                <li><i class="fas fa-check"></i> Energy efficient</li>
+            </ul>
+        </article>
+
+        <!-- Smart Water Tap (COVID-19) -->
+        <article class="project-card">
+            <h3>Smart Water Tap (COVID-19)</h3>
+            <p class="project-caption">"Touch-Free Hygiene: A smart water tap that promotes health and safety with touchless technology."</p>
+            <span class="project-tag">Health Tech</span>
+            <span class="project-tag">IoT</span>
+            <span class="project-tag">COVID-19</span>
+            <p>
+                A touchless water tap system designed to promote hygiene and reduce the spread of germs. It uses sensors to detect hand movement and automatically dispenses water, eliminating the need for physical contact.
+            </p>
+            <ul class="features">
+                <li><i class="fas fa-check"></i> Touchless operation</li>
+                <li><i class="fas fa-check"></i> Water conservation</li>
+                <li><i class="fas fa-check"></i> Hygiene promotion</li>
+            </ul>
+        </article>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="section container" id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-header">
+                <h3>Diploma/Bachelor's in Software Engineering</h3>
+                <span class="date">Expected 2024</span>
+            </div>
+            <p>Institute of Java and Software Engineering (IJSE), Sri Lanka</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3>G.C.E. Ordinary Level Examination</h3>
+                <span class="date">2021</span>
+            </div>
+            <p>Dharmasoka College, Sri Lanka</p>
+            <p>Achieved 9 passes, including Mathematics, Science, and English</p>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="section container" id="skills">
+    <h2 class="section-title">Technical Expertise</h2>
+    <div class="skills-grid">
+        <div class="skill-card">
+            <i class="fas fa-microchip skill-icon"></i>
+            <h4>Embedded Systems & IoT</h4>
+            <p>Arduino, Raspberry Pi, MQTT/HTTP, Sensor Integration</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-code skill-icon"></i>
+            <h4>Programming</h4>
+            <p>Java, Python, C/C++, Arduino</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-drafting-compass skill-icon"></i>
+            <h4>Hardware Design</h4>
+            <p>CAD (Fusion 360, AutoCAD), 3D Printing, Electronic Prototyping</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-plane skill-icon"></i>
+            <h4>Aviation & Robotics</h4>
+            <p>Arduino/Pixhawk Flight Controllers, Mobility Control Systems</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-tasks skill-icon"></i>
+            <h4>Project Management</h4>
+            <p>Agile Methodologies, Team Leadership</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-language skill-icon"></i>
+            <h4>Languages</h4>
+            <p>Sinhala (Native), English (Proficient)</p>
+        </div>
+    </div>
+</section>
+
+<!-- Patents Section -->
+<section class="section container" id="patents">
+    <h2 class="section-title">Patents & Intellectual Property</h2>
+    <div class="flex-card">
+        <div class="icon"><i class="fas fa-certificate"></i></div>
+        <div>
+            <h3>HandPilot Car</h3>
+            <p>Registration No. 20087</p>
+            <p>National Intellectual Property Office of Sri Lanka</p>
+            <p>Registered: 10/09/2018</p>
+        </div>
+    </div>
+</section>
+
+<!-- Awards & Achievements Section -->
+<section class="section container" id="awards">
+    <h2 class="section-title">Awards & Achievements</h2>
+    <div class="card-grid">
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-trophy"></i></div>
+            <div>
+                <h3>First Place – Ruhuna Invention & Innovation Exhibition (2018/2019)</h3>
+                <p>Project: HandPilot Car</p>
+                <p class="award-meta">Category: Southern Province Competition</p>
+                <p class="award-meta">Organizer: University of Ruhuna & Sri Lanka Inventors Commission</p>
+                <p class="award-meta">Achievement: Secured top position for a gaming interface design.</p>
+            </div>
+        </div>
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-medal"></i></div>
+            <div>
+                <h3>Bronze Medal – Sahasak Nimavum National Exhibition (2018)</h3>
+                <p>Project: HandPilot Car</p>
+                <p class="award-meta">Category: Schools – Transport & Automotive Field</p>
+                <p class="award-meta">Organizer: Sri Lanka Inventors Commission</p>
+                <p class="award-meta">Achievement: Awarded for innovation in automotive technology.</p>
+            </div>
+        </div>
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-award"></i></div>
+            <div>
+                <h3>Certificate of Recognition – Sahasak Nimavum (2019)</h3>
+                <p>Project: Floor Cleaning Robot</p>
+                <p class="award-meta">Category: School/Open Innovations</p>
+                <p class="award-meta">Organizer: Sri Lanka Inventors Commission</p>
+                <p class="award-meta">Achievement: Competed nationally with an automated cleaning solution.</p>
+            </div>
+        </div>
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-certificate"></i></div>
+            <div>
+                <h3>Certificate of Recognition – Institution of Engineers Sri Lanka (2018)</h3>
+                <p>Competition: Junior Inventor of the Year (JIY)</p>
+                <p class="award-meta">Represented: Dharmasoka College, Ambalangoda</p>
+                <p class="award-meta">Achievement: Recognized for technical creativity at a national engineering event.</p>
+            </div>
+        </div>
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-certificate"></i></div>
+            <div>
+                <h3>Certificate of Recognition – Ruhuna Invention & Innovation Exhibition (2018)</h3>
+                <p>Project: Smart Mission</p>
+                <p class="award-meta">Category: Southern Provincial Selection</p>
+                <p class="award-meta">Organizer: University of Ruhuna & SL Inventors Commission</p>
+                <p class="award-meta">Achievement: Showcased a robotics project at a regional exhibition.</p>
+            </div>
+        </div>
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-certificate"></i></div>
+            <div>
+                <h3>Certificate of Recognition – Institution of Engineers Sri Lanka (2019)</h3>
+                <p>Competition: Junior Inventor of the Year (JIY)</p>
+                <p class="award-meta">Represented: Dharmasoka College, Ambalangoda</p>
+                <p class="award-meta">Achievement: Second consecutive year of recognition for innovation.</p>
+            </div>
+        </div>
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-certificate"></i></div>
+            <div>
+                <h3>Certificate of Recognition – Sahasak Nimavum (2018)</h3>
+                <p>Project: HandPilot Car</p>
+                <p class="award-meta">Category: School/Open Innovations</p>
+                <p class="award-meta">Organizer: Sri Lanka Inventors Commission</p>
+                <p class="award-meta">Achievement: Competed nationally with a gaming hardware prototype.</p>
+            </div>
+        </div>
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-certificate"></i></div>
+            <div>
+                <h3>Certificate of Appreciation – Creators 2019 Exhibition</h3>
+                <p>Organizer: Inventors' Society, Dharmasoka College</p>
+                <p class="award-meta">Achievement: Outstanding performance in a school-level innovation showcase.</p>
+            </div>
+        </div>
+        <div class="flex-card">
+            <div class="icon"><i class="fas fa-certificate"></i></div>
+            <div>
+                <h3>Certificate of Recognition – Dharmasoka College, Ambalangoda (2018)</h3>
+                <p>Awarded For: Academic & Extracurricular Excellence</p>
+                <p class="award-meta">Achievement: Honored for balancing studies and innovation projects.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section container" id="contact">
+    <h2 class="section-title">Contact Me</h2>
+    <form class="contact-form" action="https://formspree.io/f/yourFormID" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="_replyto" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-social">
+            <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://facebook.com/yourusername" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+        <a href="Sethum_De_Silva_CV.pdf" download class="cv-button">
+            Download Full CV <i class="fas fa-download"></i>
+        </a>
+        <p>&copy; 2025 Sethum De Silva. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- JavaScript for Hamburger Menu & Theme Toggle -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('show');
+        });
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', function() {
+            document.body.classList.toggle('dark-theme');
+        });
+    });
+</script>
+
+<!-- AOS (Animate On Scroll) -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+</body>
+</html>
